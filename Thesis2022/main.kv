@@ -1,0 +1,217 @@
+#:import utils kivy.utils
+WindowManager:
+    Home:
+    Main_Menu:
+    Upload:
+    Create:
+    
+    
+
+<Home>:
+    name: "Home" #Home here
+    FloatLayout:
+        size: root.width, root.height
+        canvas.before:
+            Color:
+                rgb: utils.get_color_from_hex('#ffffff')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        Label:
+            text: "LARA"
+            font_size: 64
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'x': 0.35, 'top': 0.9}
+            color:(0,0,0,1)
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex('#ffffff')
+                Rectangle:
+                    pos:self.pos
+                    size:self.size
+        Image:
+            source: 'Top.png'
+            keep_ratio:True
+        Rounded:
+            text: "Get Started"
+            font_size:25
+            color:(0,0,0,1)
+            bold: True
+            size_hint:(0.3, 0.1)
+            background_normal: ''
+            pos_hint:{"x":.35,"y":.15}
+            on_release: 
+                app.root.current = "Menu"
+                root.manager.transition.direction = "left"
+            
+<Rounded@Button> 
+    background_color: (0,0,0,0)
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex('#C76189')
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius:[18]
+
+        
+
+<Main_Menu>: #Menu here
+    name: "Menu"
+
+    FloatLayout:
+        size: root.width, root.height
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            size_hint:(1,.3)
+            pos_hint: {'top':1}
+            text: "Choose [u]One[/u] \n   [size= 30]The best study is practice.[/size] \n     [size= 30]So choose one for your start![/size]"
+            markup:True
+            italic: True
+            font_size: 58
+            color:(0,0,0,1) 
+            halign: 'center'
+            canvas.before:
+                Color:
+                    rgb:utils.get_color_from_hex('#ff99cc') 
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [18]
+
+        Image:
+            source: 'Second.png'
+            keep_ratio:True
+            pos: self.pos
+            size: self.size
+            size_hint:(1, 0.5)
+            pos_hint:{"y":.2}
+            right:.1
+
+        Rounded:
+            text: "Previous"
+            bold: True
+            font_size:25
+            color: (0,0,0,1)
+            size_hint:(0.3, 0.1)
+            background_normal: ''
+            pos_hint:{"x":.35,"y":.15}
+            on_release: 
+                app.root.current = "Home"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Summarize"
+            id:sumrz
+            color: (0,0,0,1)
+            background_color:(0,0,0,0)
+            bold: True
+            font_size: 20
+            background_normal: ''
+            size_hint:(0.39, 0.1)
+            pos_hint:{"x":.60,"y":.55}
+            canvas.before:
+                Color: 
+                    rgb:utils.get_color_from_hex('#78aed3')
+                RoundedRectangle:
+                    pos:self.pos
+                    size:self.size
+                    radius:[18]
+            on_release:
+                root.selects('Summarize')
+                app.root.current = "Upload"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Questionnaire"
+            id:qst
+            color: (0,0,0,1)
+            background_color:(0,0,0,0)
+            bold: True
+            font_size: 20
+            background_normal: ''
+            size_hint:(0.39, 0.1)
+            pos_hint:{"x":.60,"y":.40}
+            canvas.before:
+                Color: 
+                    rgb:utils.get_color_from_hex('#78aed3')
+                RoundedRectangle:
+                    pos:self.pos
+                    size:self.size
+                    radius:[18]
+            on_release: 
+                
+                root.selects('Questionnaire')
+                app.root.current = "Upload"
+                root.manager.transition.direction = "left"
+
+
+<Upload>: #Upload here
+    name: "Upload"
+    FloatLayout:
+        size: root.width, root.height
+        canvas.before:
+            Color: 
+                rgb:utils.get_color_from_hex('#C76189')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    BoxLayout:
+        orientation: "vertical"
+        FileChooser:
+            size_hint: (1, 0.1)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            id: filechooser
+            FileChooserIconLayout
+
+        BoxLayout:
+            size_hint: (1, 0.1)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            spacing: 20
+            Button:
+                text: "Cancel"
+                color: (0,0,0,1)
+                background_color:(0,0,0,0)
+                bold: True
+                font_size: 20
+                background_normal: ''
+                size_hint:(0.39, 0.1)
+                pos_hint:{"x":.60,"y":.40}
+                canvas.before:
+                    Color: 
+                        rgb:utils.get_color_from_hex('#78aed3')
+                    RoundedRectangle:
+                        pos:self.pos
+                        size:self.size
+                        radius:[18]
+                on_release:
+                    app.root.current = "Menu"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Generate"
+                color: (0,0,0,1)
+                background_color:(0,0,0,0)
+                bold: True
+                font_size: 20
+                background_normal: ''
+                size_hint:(0.39, 0.1)
+                pos_hint:{"x":.60,"y":.40}
+                canvas.before:
+                    Color: 
+                        rgb:utils.get_color_from_hex('#78aed3')
+                    RoundedRectangle:
+                        pos:self.pos
+                        size:self.size
+                        radius:[18]
+                on_release:
+                    app.root.current = "Menu"
+                    root.manager.transition.direction = "right"
+                on_release: root.load(filechooser.path,filechooser.selection)
+
+                id: gnrt
+                disabled: True if filechooser.selection==[] else False
